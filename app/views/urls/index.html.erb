@@ -1,6 +1,13 @@
-<h1>Enter URL</h1>
-<div class="form">
-  form here
+<div class=container>
+  <h1>Enter URL</h1>
+  <div class="form">
+    <%= form_for(@long_url, url: "/shorten",  remote: true) do |form| %>
+      <%= form.text_field :address %>
+      <%= form.submit "Get short URL" %>
+    <% end %>
+  </div>  
 
-
+  <div class="results">
+    <p id="result"></p>
+  </div>
 </div>
