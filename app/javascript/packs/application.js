@@ -8,16 +8,12 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
+import { ajaxResults } from "../components/ajax_results"
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
 document.addEventListener("turbolinks:load", (event) => {
-
-  document.querySelector("#new_long").addEventListener("ajax:complete", (event) => {
-    // console.log(event.detail[0].response);
-    const response = event.detail[0].response;
-    document.querySelector("#result").innerText = response;
-  });
-
+  ajaxResults();
 });
