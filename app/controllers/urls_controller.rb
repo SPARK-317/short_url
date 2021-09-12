@@ -43,6 +43,30 @@ class UrlsController < ApplicationController
 
 
   def external
+    # if short exists in DB find short + long instance and full address
+    if Short.find_by_address(params[:id]).present?
+      short_url = Short.find_by_address(params[:id])
+
+        # add 1 to short count 
+        short_url.count.nil? ? (short_url.count = 1) : (short_url.count += 1)
+        short_url.save
+
+        # add 1 to long count
+        long_url = short_url.long
+        long_url.count.nil? ? (long_url.count = 1) : (long_url.count += 1)
+        long_url.save
+
+        # if long address already has http/https render from DB
+        if long_url.address.include?("http")
+          redirect_to (long_url.address)
+
+        else # else interpolate https/http
+          redirect_to ("https://#{long_url.address}")
+        end
+
+    else # if no short exists, redirect to index
+      redirect_to root_path
+    end
   end
 
 
