@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   get "/:id", to: "urls#external"
 
   # API response
-  get "/api/shorts", defaults: { format: :json }, to: "api/shorts#index"
-
+  get "/api/shorts", defaults: { format: :json }, to: "api/shorts#shorts"
+  get "/api/longs", defaults: { format: :json }, to: "api/shorts#longs"
   # namespace :api, defaults: { format: :json } do 
   #   resources :shorts, only: [ :index ]
   # end
